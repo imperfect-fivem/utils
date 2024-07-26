@@ -2,17 +2,17 @@ fx_version 'cerulean'
 game 'gta5'
 lua54 'yes'
 
-version "0.0.1"
+version "0.0.2"
 author "m-imperfect <owner@m-imperfect.net>"
-description "Utilities."
+description "Opinionated utilities."
 
-dependency 'ox_lib'
-
-shared_script '@ox_lib/init.lua'
+server_script 'src/server_dependency.lua'
 
 files {
-    'patterns.lua',
-	'colors.lua',
+    'imports/patterns.lua',
+	'imports/colors.lua',
 
-    'actionPoints.lua'
+    'imports/actionPoints.lua',
+
+    'imports/tasks.lua'
 }

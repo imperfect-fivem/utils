@@ -1,5 +1,5 @@
 if lib == nil then
-    print('^5' .. "@utils/actionPoints.lua" .. '^1' .. " didn't load, " .. '^3' .. "please import " .. '^5' .. "@ox_lib/init.lua" .. '^1' .. "." .. '^7')
+    print("^5@utils/imports/actionPoints.lua^1 didn't load,^3 please load ^5@ox_lib/init.lua^1.^7")
     return
 end
 

@@ -1,5 +1,5 @@
 if patterns == nil then
-    print('\27[35m' .. "@utils/colors.lua" .. '\27[31m' .. " didn't load, " .. '\27[33m' .. "please import " .. '\27[35m' .. "@utils/patterns.lua" .. '\27[31m' .. "." .. '\27[0m')
+    print("^5@utils/colors.lua^1 didn't load,^3 please load ^5@utils/patterns.lua^1.^7")
     return
 end
 
