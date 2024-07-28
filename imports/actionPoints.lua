@@ -33,15 +33,13 @@ local function standingOnMarker(point)
     return insideSpace(difference, point.markerSpace)
 end
 
----@alias ActionPointActionFunction fun(point: CActionPoint, callback: function)
 ---@alias ActionPointFunction fun(point: CActionPoint)
----@alias ActionPointIndicatorFunction fun(point: CActionPoint): boolean
----@alias ActionPointToggleFunction fun(point: CActionPoint, enable: boolean)
+---@alias ActionPointToggle fun(point: CActionPoint, enable: boolean, force?: boolean)
 
 ---@class ActionPointStatics
 ---@field marker MarkerProps drawn when nearby
----@field action async ActionPointActionFunction invoked when key is released, callback to end performing
----@field onEnterMarker? ActionPointIndicatorFunction invoked once the player enter the marker and determines whether to allow performing or not
+---@field action ActionPointFunction invoked when key is released
+---@field onEnterMarker? ActionPointFunction invoked once the player enter the marker and determines whether to allow performing or not
 ---@field inMarker? ActionPointFunction invoked while player is in marker
 ---@field onExitMarker? ActionPointFunction invoked once the player exit the marker
 ---@field performKey? integer [control](https://docs.fivem.net/docs/game-references/controls/), default `INPUT_PICKUP`
@@ -50,15 +48,17 @@ end
 ---@field spaceHeight? number usually used with ground markers
 
 ---@class CActionPoint: CPoint, ActionPointStatics
----@field isInMarker ActionPointIndicatorFunction determines whether player is in the marker or not
----@field performing boolean indicates whether player is performing the action now or not
----@field toggle ActionPointToggleFunction toggle point nearby behavior
+---@field isInMarker fun(point: CActionPoint): boolean determines whether player is in the marker or not
+---@field toggle ActionPointToggle toggle point on-key behavior
+---@field toggled boolean point toggle state
 
 local groundMarkers = { 1, 8, 9, 23, 25, 26, 27 }
 
----@param point CActionPoint
+---@type ActionPointFunction
 local function nearby(point)
-    point.marker:draw()
+    if point.toggled then
+        point.marker:draw()
+    end
     -- DrawMarker(
     --     28, point.coords,
     --     0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
@@ -69,36 +69,26 @@ local function nearby(point)
     --     false
     -- )
     if point:isInMarker() then
-        point:inMarker()
-        if point.performing or not point.allowPerforming then return end
+        point:isInMarker()
         if not point.wasInMarker then
             point.wasInMarker = true
-            if not point:onEnterMarker() then
-                point.allowPerforming = false
-                return
-            end
+            point:onEnterMarker()
         end
-        if not IsControlJustReleased(0, point.performKey) then return end
-        point.performing = true
-        Citizen.CreateThreadNow(function()
-            point:action(function ()
-                point.performing = false
-            end)
-        end)
+        if point.toggled and IsControlJustReleased(0, point.performKey) then
+            point:action()
+        end
     elseif point.wasInMarker then
         point.wasInMarker = false
-        Citizen.CreateThreadNow(function ()
-            point:onExitMarker()
-            point.performing = false
-            point.allowPerforming = true
-        end)
+        point:onExitMarker()
     end
 end
 
----@param point CActionPoint
----@param enable boolean
-local function toggle(point, enable)
-    point.nearby = enable and nearby or noop
+---@type ActionPointToggle
+local function toggle(point, enable, force)
+    if not point.forcedToggle or force then
+        point.toggled = enable
+        point.forcedToggle = force
+    end
 end
 
 ---@param properties ActionPointProperties
@@ -122,13 +112,13 @@ function AddActionPoint(properties)
     end
 
     point.wasInMarker = false
-    if not point.onEnterMarker then point.onEnterMarker = function() return true end end
+    if not point.onEnterMarker then point.onEnterMarker = noop end
     if not point.inMarker then point.inMarker = noop end
     if not point.onExitMarker then point.onExitMarker = noop end
 
-    point.performing = false
-    point.allowPerforming = true
     if not point.performKey then point.performKey = 38 end
+
+    point.nearby = nearby
 
     point.toggle = toggle
     point:toggle(true)
