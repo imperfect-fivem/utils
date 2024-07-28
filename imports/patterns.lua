@@ -15,8 +15,31 @@ end
 
 ---@param fnNamePattern Pattern
 ---@param paramsPatterns Pattern[]
----@return Pattern
-function patterns.stringCallFn(fnNamePattern, paramsPatterns)
+---@param str string
+---@return string[]?
+function patterns.parseStringCall(fnNamePattern, paramsPatterns, str)
+    if type(str) ~= 'string' then return end
     for index, pattern in ipairs(paramsPatterns) do paramsPatterns[index] = '(' .. pattern .. ')' end
-    return '^' .. patterns.untrimmed(fnNamePattern, 2) .. patterns.untrimmed('%(') .. table.concat(paramsPatterns, patterns.untrimmed(',')) .. patterns.untrimmed('%)') .. '$'
+    local callPattern = '^' .. patterns.untrimmed(fnNamePattern, 2) .. patterns.untrimmed('%(') .. table.concat(paramsPatterns, patterns.untrimmed(',')) .. patterns.untrimmed('%)') .. '$'
+    local components = { str:lower():match(callPattern) }
+    if next(components) then
+        return components
+    end
+end
+
+---@param fnNamePattern Pattern
+---@param paramsCount integer
+---@param str string
+---@return number[]?
+function patterns.parseIntegersStringCall(fnNamePattern, paramsCount, str)
+    local integerPattern, paramsPatterns = '%d+', {}
+    for i = 1, paramsCount do paramsPatterns[i] = integerPattern end
+    local params = patterns.parseStringCall(fnNamePattern, paramsPatterns, str)
+    if not params then return end
+    for index, component in ipairs(params) do
+        ---@cast params number[]
+        params[index] = tonumber(component)
+        if not params[index] then return end
+    end
+    return params
 end

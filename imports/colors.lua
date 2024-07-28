@@ -63,6 +63,7 @@ end
 ---@return boolean
 function IsRGB(value)
   if type(value) ~= 'vector3' then return false end
+  ---@cast value vector3
   for i = 1, 3 do
     if value[i] < 0 or value[i] > 255 then
       return false
@@ -85,19 +86,36 @@ function RGBToDecimal(color)
   return ('#%x%x%x'):format(color.r, color.g, color.b)
 end
 
-local rgbPattern = patterns.stringCallFn('rgb', { '%d+', '%d+', '%d+' })
-
 ---@param str string `"rgb(0~255, 0~255, 0~255)"`
 ---@return rgb?
 function ParseRGBString(str)
     if type(str) ~= 'string' then return end
-    local components = { str:match(rgbPattern) } --[=[@as string[]]=]
-    if not next(components) then return end
-    for index, component in ipairs(components) do
-        components[index] = tonumber(component)
-        if not components[index] then return end
+    local components = patterns.parseIntegersStringCall('rgb', 3, str)
+    local color = components and rgb(table.unpack(components)) or nil
+    if IsRGB(color) then return color end
+end
+
+---@alias rgba vector4
+rgba = vector4
+
+---@param value any
+---@return boolean
+function IsRGBA(value)
+    if type(value) ~= 'vector4' then return false end
+    ---@cast value vector4
+    for i = 1, 3 do
+      if value[i] < 0 or value[i] > 255 then
+        return false
+      end
     end
-    ---@cast components number[]
-    local color = rgb(table.unpack(components))
-    return IsRGB(color) and color or nil
+    return value.a >= 0 and value.a <= 100
+end
+
+---@param str string `"rgba(0~255, 0~255, 0~255, 0~100)"`
+---@return rgba?
+function ParseRGBAString(str)
+    if type(str) ~= 'string' then return end
+    local components = patterns.parseIntegersStringCall('rgba', 4, str)
+    local color = components and rgba(table.unpack(components)) or nil
+    if IsRGBA(color) then return color end
 end
