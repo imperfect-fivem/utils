@@ -11,5 +11,5 @@ function WaitEntityWithNetworkIdToExistLocally(netId, attempts, attemptDelayMs)
         attempts = attempts - 1
         Wait(attemptDelayMs)
     end
-    return NetworkGetEntityFromNetworkId(netId)
+    if exists then return NetworkGetEntityFromNetworkId(netId) end
 end
