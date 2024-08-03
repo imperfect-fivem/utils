@@ -42,17 +42,6 @@ shared_scripts {
 }
 ```
 
-### [Action Points](./imports/actionPoints.lua)
-
-[`fxmanifest.lua`](https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/):
-
-```lua
-shared_scripts {
-    '@ox_lib/init.lua',
-    '@utils/imports/actionPoints.lua'
-}
-```
-
 ## 🤖 Language Server
 
 Install [Sumneko Lua](https://marketplace.visualstudio.com/items?itemName=sumneko.lua) Language Server on [Visual Studio Code](https://code.visualstudio.com/).

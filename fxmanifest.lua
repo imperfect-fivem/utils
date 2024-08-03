@@ -11,11 +11,8 @@ server_script 'src/server_dependency.lua'
 files {
     'imports/convar.lua',
 
-    'imports/tasks.lua',
     'imports/network.lua',
 
     'imports/patterns.lua',
-	'imports/colors.lua',
-
-    'imports/actionPoints.lua'
+	'imports/colors.lua'
 }
