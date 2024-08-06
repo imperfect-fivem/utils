@@ -1,0 +1,11 @@
+{
+    "Lua.runtime.plugin": "../../.vscode/cfx/plugin.lua",
+    "Lua.workspace.library": [
+        "../../.vscode/cfx/library/runtime",
+        "../../.vscode/cfx/library/natives/CFX-NATIVE",
+        "../../.vscode/cfx/library/natives/GTAV",
+    ],
+    "cSpell.ignoreWords": [
+        "dependencie"
+    ]
+}
