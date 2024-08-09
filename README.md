@@ -23,6 +23,45 @@ server_dependency 'api_resource'
 
 ## 📥 Lua Imports
 
+### [Convar](./imports/convar.lua)
+
+[`fxmanifest.lua`](https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/):
+
+```lua
+shared_script '@utils/imports/convar.lua'
+```
+
+#### Example
+
+```lua
+local debugging = GetConvarBoolean('resource:debug', false)
+```
+
+### [Network](./imports/network.lua)
+
+[`fxmanifest.lua`](https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/):
+
+```lua
+client_script '@utils/imports/convar.lua'
+```
+
+#### Example
+
+`client.lua`
+
+```lua
+RegisterNetEvent('TurnOffVehicleRadio', function(vehicleNetId)
+    local attempts, attemptDelay = 2, 5000
+    local vehicle = WaitEntityWithNetworkIdToExistLocally(vehicleNetId, attempts, attemptDelay)
+    if not vehicle then
+        TriggerEvent('WaitedForVehicleToLoadForTooLong', vehicleNetId)
+        return
+    end
+
+    SetVehRadioStation(vehicle, "OFF")
+end)
+```
+
 ### [Patterns](./imports/patterns.lua)
 
 [`fxmanifest.lua`](https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/):
