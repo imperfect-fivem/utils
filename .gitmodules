@@ -1,0 +1,3 @@
+[submodule ".vscode/lls-addon"]
+	path = .vscode/lls-addon
+	url = https://github.com/imperfect-fivem/lls-addon.git

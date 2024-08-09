@@ -1,11 +1,10 @@
 {
-    "Lua.runtime.plugin": "../../.vscode/cfx/plugin.lua",
-    "Lua.workspace.library": [
-        "../../.vscode/cfx/library/runtime",
-        "../../.vscode/cfx/library/natives/CFX-NATIVE",
-        "../../.vscode/cfx/library/natives/GTAV",
-    ],
-    "cSpell.ignoreWords": [
-        "dependencie"
-    ]
+  "Lua.runtime.plugin": "./.vscode/lls-addon/plugin.lua",
+  "Lua.workspace.library": [
+    "./.vscode/lls-addon/library/runtime",
+    "./.vscode/lls-addon/library/natives/CFX-NATIVE",
+    "./.vscode/lls-addon/library/natives/GTAV"
+  ],
+  "cSpell.ignoreWords": ["dependencie"],
+  "cSpell.words": ["convar"]
 }
