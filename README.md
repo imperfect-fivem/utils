@@ -23,12 +23,13 @@ server_dependency 'api_resource'
 
 ## 📥 Lua Imports
 
+The [`require`](https://overextended.dev/ox_lib/Modules/Require/Shared) function that is used in this section is defined in [ox_lib](https://overextended.dev/ox_lib).  
+If you don't want to use it then load the target file manually in your resource [`fxmanifest.lua`](https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/).
+
 ### [Convar](./imports/convar.lua)
 
-[`fxmanifest.lua`](https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/):
-
 ```lua
-shared_script '@utils/imports/convar.lua'
+require '@utils.imports.convar'
 ```
 
 #### Example
@@ -39,15 +40,13 @@ local debugging = GetConvarBoolean('resource:debug', false)
 
 ### [Network](./imports/network.lua)
 
-[`fxmanifest.lua`](https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/):
+[`Client`](https://docs.fivem.net/docs/scripting-reference/client-functions/) only.
 
 ```lua
-client_script '@utils/imports/convar.lua'
+require '@utils.imports.network'
 ```
 
 #### Example
-
-`client.lua`
 
 ```lua
 RegisterNetEvent('TurnOffVehicleRadio', function(vehicleNetId)
@@ -64,21 +63,18 @@ end)
 
 ### [Patterns](./imports/patterns.lua)
 
-[`fxmanifest.lua`](https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/):
+TODO: document
 
 ```lua
-shared_script '@utils/imports/patterns.lua'
+require '@utils.imports.patterns'
 ```
 
 ### [Colors](./imports/colors.lua)
 
-[`fxmanifest.lua`](https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/):
+TODO: document
 
 ```lua
-shared_scripts {
-    '@utils/imports/patterns.lua',
-    '@utils/imports/colors.lua'
-}
+require '@utils.imports.colors'
 ```
 
 ## 🤖 Language Server

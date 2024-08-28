@@ -1,5 +1,6 @@
+pcall(require, '@utils/imports/patterns.lua')
 if patterns == nil then
-    print("^5@utils/colors.lua^1 didn't load,^3 please load ^5@utils/patterns.lua^1.^7")
+    print("^5@utils/colors.lua^1 didn't load, ^5@utils/patterns.lua^1 is required.^7")
     return
 end
 

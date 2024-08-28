@@ -8,11 +8,4 @@ description "Opinionated utilities."
 
 server_script 'src/server_dependency.lua'
 
-files {
-    'imports/convar.lua',
-
-    'imports/network.lua',
-
-    'imports/patterns.lua',
-	'imports/colors.lua'
-}
+file 'imports/*.lua'
