@@ -60,7 +60,7 @@ local debugging = GetConvarBoolean('resource:debug', false)
 
 ### [Network](./imports/network.lua)
 
-[`Client`](https://docs.fivem.net/docs/scripting-reference/client-functions/) only.
+[**`client`**](https://docs.fivem.net/docs/scripting-reference/client-functions/)
 
 ```lua
 require '@utils.imports.network'
@@ -91,10 +91,35 @@ require '@utils.imports.patterns'
 
 ### [Colors](./imports/colors.lua)
 
+[**`lua 5.4`**](https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/#lua54)  
 TODO: document
 
 ```lua
 require '@utils.imports.colors'
+```
+
+#### Examples
+
+```lua
+local color = Color('#4287f5', 0.39)
+print('opacity:', color.opacity) -- 0.39
+print('decimal:', color.decimal) -- 4360181
+print('hex:', color.hex) -- #4287f5
+local rgb = color.rgb
+print('rgb:', rgb.r, rgb.b, rgb.g) -- 66      245     135
+local rgba = color.rgba
+print('rgba:', rgba.r, rgba.b, rgba.g, rgba.a) -- 66      245     135     100
+```
+
+```lua
+local color = Color('rgba(252, 3, 182, 51)')
+print('opacity:', color.opacity) -- 0.2
+print('decimal:', color.decimal) -- 16516022
+print('hex:', color.hex) -- #fc03b6
+local rgb = color.rgb
+print('rgb:', rgb.r, rgb.b, rgb.g) -- 252     182     3
+local rgba = color.rgba
+print('rgba:', rgba.r, rgba.b, rgba.g, rgba.a) -- 252     182     3       51
 ```
 
 ## 🤖 Language Server
