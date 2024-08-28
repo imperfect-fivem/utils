@@ -26,6 +26,26 @@ server_dependency 'api_resource'
 The [`require`](https://overextended.dev/ox_lib/Modules/Require/Shared) function that is used in this section is defined in [ox_lib](https://overextended.dev/ox_lib).  
 If you don't want to use it then load the target file manually in your resource [`fxmanifest.lua`](https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/).
 
+### [Promise](./imports/promise.lua)
+
+```lua
+require '@utils.imports.promise'
+```
+
+#### Example
+
+```lua
+local function operation(p1, callback, p2)
+  --- ...
+  callback(true, 123, 'text')
+end
+
+local results = promise:new()
+operation('whatever', results:resolveCallback(), 'whatever2')
+local bool, int, str = results:awaitCallback()
+print(bool, int, str) --- true    123    text
+```
+
 ### [Convar](./imports/convar.lua)
 
 ```lua
