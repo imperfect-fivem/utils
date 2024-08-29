@@ -83,7 +83,7 @@ end)
 
 ### [Patterns](./imports/patterns.lua)
 
-TODO: document
+<!-- TODO: document -->
 
 ```lua
 require '@utils.imports.patterns'
@@ -91,8 +91,9 @@ require '@utils.imports.patterns'
 
 ### [Colors](./imports/colors.lua)
 
-[**`lua 5.4`**](https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/#lua54)  
-TODO: document
+[**`lua 5.4`**](https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/#lua54)
+
+<!-- TODO: document -->
 
 ```lua
 require '@utils.imports.colors'
