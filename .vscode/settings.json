@@ -6,5 +6,6 @@
     "./.vscode/lls-addon/library/natives/GTAV"
   ],
   "cSpell.ignoreWords": ["dependencie"],
-  "cSpell.words": ["convar"]
+  "cSpell.words": ["convar"],
+  "Lua.diagnostics.disable": ["lowercase-global"]
 }

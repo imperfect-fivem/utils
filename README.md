@@ -46,6 +46,20 @@ local bool, int, str = results:awaitCallback()
 print(bool, int, str) --- true    123    text
 ```
 
+### [Exports](./imports/exports.lua)
+
+```lua
+require '@utils.imports.exports'
+```
+
+#### Example
+
+```lua
+provideExport('resource', 'method', function(...)
+  -- ...
+end)
+```
+
 ### [Convar](./imports/convar.lua)
 
 ```lua
