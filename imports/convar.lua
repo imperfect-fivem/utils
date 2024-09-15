@@ -2,6 +2,5 @@
 ---@param default boolean
 ---@return boolean
 function GetConvarBoolean(varName, default)
-    local raw = GetConvar(varName, tostring(default))
-    return raw ~= '0' and raw ~= 'false'
+    return GetConvarInt(varName, default and 1 or 0) == 1
 end
