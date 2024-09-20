@@ -90,7 +90,7 @@ RegisterNetEvent('TurnOffVehicleRadio', function(vehicleNetId)
         TriggerEvent('WaitedForVehicleToLoadForTooLong', vehicleNetId)
         return
     end
-
+    NetworkWaitUntilHaveControlOfNetworkId(vehicleNetId)
     SetVehRadioStation(vehicle, "OFF")
 end)
 ```
