@@ -1,4 +1,24 @@
 {
+  "explorer.copyRelativePathSeparator": "/",
+  "Lua.runtime.version": "Lua 5.4",
+  "Lua.codeLens.enable": true,
+  "Lua.workspace.ignoreSubmodules": false,
+  "Lua.completion.autoRequire": false,
+  "Lua.hover.expandAlias": false,
+  "Lua.type.inferParamType": true,
+  "Lua.runtime.nonstandardSymbol": [
+    "/**/",
+    "`",
+    "+=",
+    "-=",
+    "*=",
+    "/=",
+    "<<=",
+    ">>=",
+    "&=",
+    "|=",
+    "^="
+  ],
   "Lua.runtime.plugin": "./.vscode/lls-addon/plugin.lua",
   "Lua.workspace.library": [
     "./.vscode/lls-addon/library/runtime",
